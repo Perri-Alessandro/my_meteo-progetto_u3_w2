@@ -37,6 +37,7 @@ const Welcome = () => {
       <div onClick={pageClick}>
         <p className=" text-danger fs-5">Click here to hide the alert</p>
       </div>
+      <img src="/public/img/perri-alessandro-wipdefffacq.jpg" alt="" />
     </>
   );
 };
