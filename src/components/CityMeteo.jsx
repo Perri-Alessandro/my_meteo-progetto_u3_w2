@@ -25,7 +25,7 @@ const CityMeteo = ({ city }) => {
       </Row>
       <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center">
         <div className="background-overlay"></div>
-        <p className="fs-3 col-12">
+        <p className="fs-3 col-12 mt-1">
           City: <span className="fw-bold text-primary">{meteo.name}</span>
         </p>
         <p className="fs-5 col-12">
@@ -40,9 +40,13 @@ const CityMeteo = ({ city }) => {
             {meteo.weather &&
               meteo.weather.length > 0 &&
               meteo.weather[0].description}
-          </span>
+          </span>{" "}
+          <img
+            className="bg-black rounded-5 ms-2"
+            src={`https://openweathermap.org/img/wn/${meteo.weather[0].icon}.png`}
+            alt="wheater img"
+          />
         </p>
-
         <Col xs={6}>
           <p>&deg;C: {meteo.main && meteo.main.temp}</p>
           <p>&deg;C feels like: {meteo.main && meteo.main.feels_like}</p>
