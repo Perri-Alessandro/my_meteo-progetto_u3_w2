@@ -23,11 +23,7 @@ const MyNav = (props) => {
 
     setLoading(true);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-        cityName
-      )},${encodeURIComponent(
-        countryCode
-      )}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
     )
       .then((response) => {
         if (response.ok) {
@@ -41,6 +37,30 @@ const MyNav = (props) => {
         console.log("DATI RICEVUTI", data);
         props.handleSearch(data);
         props.closeWelcome();
+        // fetch(
+        //   `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName},${countryCode}&appid=32c53ab5bcc217dac5852efd68dc0544&units=metric`
+        // )
+        //   .then((response) => {
+        //     if (response.ok) {
+        //       return response.json();
+        //     } else {
+        //       throw new Error("Error fetching forecast weather data");
+        //     }
+        //   })
+        //   .then((forecastWeatherData) => {
+        //     // Qui puoi gestire i dati del meteo attuale e dei giorni successivi
+        //     console.log("Current Weather Data:", data);
+        //     console.log("Forecast Weather Data:", forecastWeatherData);
+        //     // props.handleSearch(data);
+        //     // props.closeWelcome();
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error fetching forecast weather data:", error);
+        //     alert("Error fetching forecast weather data");
+        //   })
+        //   .finally(() => {
+        //     setLoading(false);
+        //   });
       })
       .catch((err) => {
         console.log("ERRORE NEL CONTATTARE IL SERVER", err);
