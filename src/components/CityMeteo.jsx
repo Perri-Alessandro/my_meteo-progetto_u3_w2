@@ -2,43 +2,65 @@ import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Spinnerr from "./Spinner";
 
-const CityMeteo = () => {
-  const [meteo, setMeteo] = useState([]);
+const CityMeteo = ({ city }) => {
+  const [meteo, setMeteo] = useState({});
   const [spinner, setSpinner] = useState(false);
+  const [today, setToday] = useState("");
 
   useEffect(() => {
-    getMeteo();
-  }, []);
+    if (city) {
+      setMeteo(city);
+      setToday(new Date(city.dt * 1000).toLocaleDateString());
+    }
+  }, [city]);
 
-  const getMeteo = () => {
-    setSpinner(true);
-    fetch(
-      "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=54f053484e0d18baee784ea47f823bff"
-    )
-      .then((response) => {
-        if (response.ok) {
-          console.log("IN CONTATTO CON IL SERVER", response);
-          return response.json();
-        } else {
-          throw new Error("RISPOSTA NON OK RICEVUTA DAL SERVER");
-        }
-      })
-      .then((data) => {
-        console.log("DATI RICEVUTI CORRETTAMENTE", data);
-        setMeteo(data.weather);
-        setSpinner(false);
-      })
-      .catch((err) => {
-        console.log("ERRORE NEL CONTATTARE IL SERVER", err);
-        alert("ERRORE NEL CONTATTARE IL SERVER");
-      });
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp * 1000); // Moltiplica per 1000 per convertire in millisecondi
+    return date.toLocaleTimeString(); // Ottiene l'ora in formato locale
   };
 
   return (
-    <Row>
-      {spinner && <Spinnerr />}
-      <Col>Ciao {meteo.main}</Col>
-    </Row>
+    <>
+      <Row>
+        {" "}
+        <p className="mt-4 fs-5 col-12">Today {today}</p>
+      </Row>
+      <Row className=" border justify-content-center align-items-center">
+        {spinner && <Spinnerr />}
+
+        <p className="fs-3 col-12">
+          City: <span className="fw-bold text-primary">{meteo.name}</span>
+        </p>
+        <p className="fs-5 col-12">
+          Latitude: {meteo.coord && meteo.coord.lat} - Longitude:{" "}
+          {meteo.coord && meteo.coord.lon}
+        </p>
+        <p className=" col-12  mb-5">
+          Weather description:{" "}
+          <span className="fs-5 text-success">
+            {meteo.weather && meteo.weather.length > 0 && meteo.weather[0].main}{" "}
+            -{" "}
+            {meteo.weather &&
+              meteo.weather.length > 0 &&
+              meteo.weather[0].description}
+          </span>
+        </p>
+
+        <Col xs={5} lg={6}>
+          <p>&deg;C: {meteo.main && meteo.main.temp}</p>
+          <p>&deg;C feels like: {meteo.main && meteo.main.feels_like}</p>
+          <p>&deg;C max: {meteo.main && meteo.main.temp_max}</p>
+          <p>&deg;C min: {meteo.main && meteo.main.temp_min}</p>
+        </Col>
+        <Col xs={5} lg={6}>
+          <p>Humidity: {meteo.main && meteo.main.humidity}</p>
+          <p>Pressure: {meteo.main && meteo.main.pressure}</p>
+          <p>Sunrise: {meteo.sys && formatTime(meteo.sys.sunrise)}</p>
+          <p>Sunset: {meteo.sys && formatTime(meteo.sys.sunset)}</p>
+        </Col>
+        <p className=" col-12">Wind Speed: {meteo.wind?.speed ?? "N/A"} m/s</p>
+      </Row>
+    </>
   );
 };
 export default CityMeteo;

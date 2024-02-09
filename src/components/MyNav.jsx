@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -5,7 +6,42 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function NavScrollExample(props) {
+const MyNav = (props) => {
+  const [cityAndCountry, setCityAndCountry] = useState("");
+
+  const handleCitySearch = () => {
+    if (!cityAndCountry.trim()) {
+      alert("Please enter a city name and country code.");
+      return;
+    }
+
+    const [cityName, countryCode] = cityAndCountry
+      .split(",")
+      .map((item) => item.trim());
+
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        cityName
+      )},${encodeURIComponent(
+        countryCode
+      )}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("RISPOSTA NON OK RICEVUTA DAL SERVER");
+        }
+      })
+      .then((data) => {
+        props.handleSearch(data);
+      })
+      .catch((err) => {
+        console.log("ERRORE NEL CONTATTARE IL SERVER", err);
+        alert("ERRORE NEL CONTATTARE IL SERVER");
+      });
+  };
+
   return (
     <Navbar expand="lg" className="bg-black fixed-top">
       <Container fluid>
@@ -45,9 +81,13 @@ function NavScrollExample(props) {
               placeholder="Insert city to search"
               className="me-2 rounded-4"
               aria-label="Search"
-              onChange={(e) => props.handleSearch(e.target.value)}
+              onChange={(e) => setCityAndCountry(e.target.value)}
             />
-            <Button variant="outline-success" className="rounded-4 border-2">
+            <Button
+              variant="outline-success"
+              className="rounded-4 border-2"
+              onClick={handleCitySearch}
+            >
               Search
             </Button>
           </Form>
@@ -55,6 +95,6 @@ function NavScrollExample(props) {
       </Container>
     </Navbar>
   );
-}
+};
 
-export default NavScrollExample;
+export default MyNav;
