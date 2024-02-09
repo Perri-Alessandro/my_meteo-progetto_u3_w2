@@ -4,7 +4,7 @@ const MyFooter = (param) => {
   const [scriptResult, setScriptResult] = useState("");
 
   const mobileStyles = {
-    fontSize: "0.65em",
+    fontSize: "0.6em",
   };
 
   const desktopStyles = {
