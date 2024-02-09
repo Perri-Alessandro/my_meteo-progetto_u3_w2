@@ -23,7 +23,7 @@ const MyNav = (props) => {
 
     setLoading(true);
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
         cityName
       )},${encodeURIComponent(
         countryCode
