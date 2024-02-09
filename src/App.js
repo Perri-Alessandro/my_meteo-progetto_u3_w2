@@ -13,14 +13,23 @@ function App() {
   const handleCitySearch = (cityData) => {
     setSelectedCity(cityData);
   };
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const closeWelcome = () => {
+    setShowWelcome(false);
+  };
 
   return (
     <div className="App d-flex flex-column justify-content-between vh-100">
       <header className="">
-        <MyNav title="Giuliacxi" handleSearch={handleCitySearch} />
+        <MyNav
+          closeWelcome={closeWelcome}
+          title="Giuliacxi"
+          handleSearch={handleCitySearch}
+        />
+        {showWelcome && <Welcome />}
       </header>
       <main className="flex-grow-1">
-        <Welcome />
         <Container>
           {selectedCity && <CityMeteo city={selectedCity} />}
         </Container>

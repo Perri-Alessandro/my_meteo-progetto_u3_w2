@@ -40,6 +40,7 @@ const MyNav = (props) => {
       .then((data) => {
         console.log("DATI RICEVUTI", data);
         props.handleSearch(data);
+        props.closeWelcome();
       })
       .catch((err) => {
         console.log("ERRORE NEL CONTATTARE IL SERVER", err);
@@ -51,13 +52,16 @@ const MyNav = (props) => {
   };
 
   return (
-    <Navbar expand="lg" className="bg-black fixed-top">
+    <Navbar expand="lg" className="bg-black">
       <Container fluid>
         <Navbar.Brand href="#" className="text-white">
           {" "}
           {props.title} Meteo
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" className="bg-white" />
+        <Navbar.Toggle
+          aria-controls="navbarScroll"
+          className="bg-white border-warning border-2"
+        />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"

@@ -21,9 +21,9 @@ const CityMeteo = ({ city }) => {
     <>
       <Row>
         {" "}
-        <p className="mt-4 fs-5 col-12">Today {today}</p>
+        <p className="mt-3 fs-5 col-12">Today {today}</p>
       </Row>
-      <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center">
+      <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center mx-1">
         <div className="background-overlay"></div>
         <p className="fs-3 col-12 mt-2">
           City: <span className="fw-bold text-primary">{meteo.name}</span>{" "}
