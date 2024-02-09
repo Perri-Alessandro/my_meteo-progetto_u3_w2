@@ -19,7 +19,7 @@ const Welcome = () => {
           variant="success"
           onClose={chiudiAlert}
           dismissible
-          className="mt-5"
+          className="mt-3"
         >
           <Alert.Heading>Hey, nice to see you !</Alert.Heading>
           <p>Welcome in my new Meteo page</p>
@@ -27,7 +27,7 @@ const Welcome = () => {
 
           <p className="mb-0">
             For a more accurate search, enter the country code after the country
-            name, in in the navigation bar input (from mobile by clicking on the
+            name, in the navigation bar input (from mobile by clicking on the
             hamburger menu), followed by a comma (es: "roma,it", "bristol,uk")
           </p>
           <hr />
