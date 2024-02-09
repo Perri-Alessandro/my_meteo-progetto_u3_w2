@@ -23,7 +23,7 @@ const CityMeteo = ({ city }) => {
         {" "}
         <p className="mt-4 fs-5 col-12">Today {today}</p>
       </Row>
-      <Row className=" border border-info rounded-5 justify-content-center align-items-center">
+      <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center">
         <div className="background-overlay"></div>
         <p className="fs-3 col-12">
           City: <span className="fw-bold text-primary">{meteo.name}</span>
@@ -43,13 +43,13 @@ const CityMeteo = ({ city }) => {
           </span>
         </p>
 
-        <Col xs={5} lg={6}>
+        <Col xs={6}>
           <p>&deg;C: {meteo.main && meteo.main.temp}</p>
           <p>&deg;C feels like: {meteo.main && meteo.main.feels_like}</p>
           <p>&deg;C max: {meteo.main && meteo.main.temp_max}</p>
           <p>&deg;C min: {meteo.main && meteo.main.temp_min}</p>
         </Col>
-        <Col xs={5} lg={6}>
+        <Col xs={6}>
           <p>Humidity: {meteo.main && meteo.main.humidity}</p>
           <p>Pressure: {meteo.main && meteo.main.pressure}</p>
           <p>Sunrise: {meteo.sys && formatTime(meteo.sys.sunrise)}</p>
