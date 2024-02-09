@@ -6,10 +6,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Spinner from "./Spinner";
+import { Col, Row } from "react-bootstrap";
 
 const MyNav = (props) => {
   const [cityAndCountry, setCityAndCountry] = useState("");
   const [loading, setLoading] = useState(false);
+  const [foundCities, setFoundCities] = useState([]);
+  const [showOptions, setShowOptions] = useState(true);
 
   const handleCitySearch = () => {
     if (!cityAndCountry.trim()) {
@@ -17,13 +20,13 @@ const MyNav = (props) => {
       return;
     }
 
-    const [cityName, countryCode] = cityAndCountry
-      .split(",")
-      .map((item) => item.trim());
+    // const [cityName, countryCode] = cityAndCountry
+    //   .split(",")
+    //   .map((item) => item.trim());
 
     setLoading(true);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${cityAndCountry}&limit=5&appid=54f053484e0d18baee784ea47f823bff&units=metric`
     )
       .then((response) => {
         if (response.ok) {
@@ -37,6 +40,8 @@ const MyNav = (props) => {
         console.log("DATI RICEVUTI", data);
         props.handleSearch(data);
         props.closeWelcome();
+        setFoundCities(data);
+
         // fetch(
         //   `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName},${countryCode}&appid=32c53ab5bcc217dac5852efd68dc0544&units=metric`
         // )
@@ -68,6 +73,34 @@ const MyNav = (props) => {
       })
       .finally(() => {
         setLoading(false);
+      });
+  };
+
+  const handleCitySelection = (selectedCity) => {
+    setLoading(true);
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.name},${selectedCity.country}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error fetching weather data");
+        }
+      })
+      .then((weatherData) => {
+        // Esegui qui la logica per gestire i dati meteo della città selezionata
+        console.log("DATI RICEVUTI PER LA CITTà SELEZIONATA:", weatherData);
+        props.handleSearch(weatherData);
+        props.closeWelcome();
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+        alert("Error fetching weather data");
+      })
+      .finally(() => {
+        setLoading(false);
+        setShowOptions(true);
       });
   };
 
@@ -128,6 +161,24 @@ const MyNav = (props) => {
               Search
             </Button>
           </Form>
+          {showOptions && foundCities.length > 0 && (
+            <Row className="justify-content-center align-items-center">
+              {foundCities.map((city, index) => (
+                <Col
+                  xs={4}
+                  key={city.sys ? city.sys.id : index}
+                  className="m-1 mt-3"
+                >
+                  <button
+                    onClick={() => handleCitySelection(city)}
+                    className="rounded-3 bg-warning border-info"
+                  >
+                    {city.name}, {city.country}, {city.state}
+                  </button>
+                </Col>
+              ))}
+            </Row>
+          )}
         </Navbar.Collapse>
       </Container>
       {loading && <Spinner className="ms-4 col" />}
