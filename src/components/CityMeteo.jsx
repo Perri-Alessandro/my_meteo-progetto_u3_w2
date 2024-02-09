@@ -46,15 +46,11 @@ const CityMeteo = ({ city }) => {
           Latitude: {meteo.coord && meteo.coord.lat} - Longitude:{" "}
           {meteo.coord && meteo.coord.lon}
         </p>
-        <p className=" col-12  mb-5">
-          Weather description:{" "}
-          <span className="fs-5 text-success">
-            {meteo.weather && meteo.weather.length > 0 && meteo.weather[0].main}{" "}
-            -{" "}
-            {meteo.weather &&
-              meteo.weather.length > 0 &&
-              meteo.weather[0].description}
-          </span>{" "}
+        <p className=" col-12  mb-5 fs-5 text-success">
+          {meteo.weather && meteo.weather.length > 0 && meteo.weather[0].main} -{" "}
+          {meteo.weather &&
+            meteo.weather.length > 0 &&
+            meteo.weather[0].description}
         </p>
         <Col xs={6}>
           <p>&deg;C: {meteo.main && meteo.main.temp}</p>

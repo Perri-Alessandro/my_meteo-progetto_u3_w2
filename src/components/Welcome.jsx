@@ -31,7 +31,7 @@ const Welcome = () => {
             hamburger menu), followed by a comma (ex: "roma,it", "bristol,uk")
           </p>
           <hr />
-          <p>weather data courtesy of openweathermap</p>
+          <p>weather data courtesy of openweathermap api</p>
           <div onClick={pageClick}>
             <p className=" text-danger fs-5">Click here to hide the alert</p>
           </div>
