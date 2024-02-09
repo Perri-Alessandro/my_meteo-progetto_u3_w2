@@ -28,7 +28,7 @@ const Welcome = () => {
           <p className="mb-0">
             For a more accurate search, enter the country code after the country
             name, in the navigation bar input (from mobile by clicking on the
-            hamburger menu), followed by a comma (es: "roma,it", "bristol,uk")
+            hamburger menu), followed by a comma (ex: "roma,it", "bristol,uk")
           </p>
           <hr />
           <p>weather data courtesy of openweathermap</p>
