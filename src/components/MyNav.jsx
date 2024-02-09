@@ -13,7 +13,7 @@ const MyNav = (props) => {
 
   const handleCitySearch = () => {
     if (!cityAndCountry.trim()) {
-      alert("Please enter a city name and country code.");
+      alert("Please enter a city name.");
       return;
     }
 

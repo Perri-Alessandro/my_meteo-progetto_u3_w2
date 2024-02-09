@@ -28,7 +28,7 @@ const CityMeteo = ({ city }) => {
         <p className="fs-3 col-12 mt-2">
           City: <span className="fw-bold text-primary">{meteo.name}</span>{" "}
           <img
-            className="bg-black rounded-5 ms-2"
+            className="bg-info rounded-5 ms-2"
             src={
               meteo.weather &&
               meteo.weather[0] &&
