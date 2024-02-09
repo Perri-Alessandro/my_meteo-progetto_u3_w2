@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Spinner from "./Spinner";
 
 const MyNav = (props) => {
   const [cityAndCountry, setCityAndCountry] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleCitySearch = () => {
     if (!cityAndCountry.trim()) {
@@ -19,6 +21,7 @@ const MyNav = (props) => {
       .split(",")
       .map((item) => item.trim());
 
+    setLoading(true);
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
         cityName
@@ -28,17 +31,22 @@ const MyNav = (props) => {
     )
       .then((response) => {
         if (response.ok) {
+          console.log("IN CONTATTO CON IL SERVER", response);
           return response.json();
         } else {
           throw new Error("RISPOSTA NON OK RICEVUTA DAL SERVER");
         }
       })
       .then((data) => {
+        console.log("DATI RICEVUTI", data);
         props.handleSearch(data);
       })
       .catch((err) => {
         console.log("ERRORE NEL CONTATTARE IL SERVER", err);
         alert("ERRORE NEL CONTATTARE IL SERVER");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -59,8 +67,12 @@ const MyNav = (props) => {
             <Nav.Link href="#action1" className="text-white">
               Home
             </Nav.Link>
-            <Nav.Link href="#action2" className="text-white">
-              About
+            <Nav.Link
+              href="https://github.com/Perri-Alessandro"
+              target="blank"
+              className="text-white"
+            >
+              My Github Page
             </Nav.Link>
             <NavDropdown title="Broswe" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3" className="text-center ">
@@ -75,6 +87,7 @@ const MyNav = (props) => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+
           <Form className="d-flex">
             <Form.Control
               type="search"
@@ -93,6 +106,7 @@ const MyNav = (props) => {
           </Form>
         </Navbar.Collapse>
       </Container>
+      {loading && <Spinner className="ms-4 col" />}
     </Navbar>
   );
 };

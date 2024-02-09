@@ -24,7 +24,10 @@ const Welcome = () => {
           <Alert.Heading>Hey, nice to see you !</Alert.Heading>
           <p>Welcome in my new Meteo page</p>
           <hr />
-          <p className="mb-0">Click on the card to read or add a comments</p>
+          <p className="mb-0">
+            For a more accurate search, enter the country code after the country
+            name, followed by a comma (es: "roma,it", "bristol,uk")
+          </p>
         </Alert>
       )}
       <div onClick={pageClick}>

@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import Spinnerr from "./Spinner";
 
 const CityMeteo = ({ city }) => {
   const [meteo, setMeteo] = useState({});
-  const [spinner, setSpinner] = useState(false);
   const [today, setToday] = useState("");
 
   useEffect(() => {
@@ -25,9 +23,8 @@ const CityMeteo = ({ city }) => {
         {" "}
         <p className="mt-4 fs-5 col-12">Today {today}</p>
       </Row>
-      <Row className=" border justify-content-center align-items-center">
-        {spinner && <Spinnerr />}
-
+      <Row className=" border border-info rounded-5 justify-content-center align-items-center">
+        <div className="background-overlay"></div>
         <p className="fs-3 col-12">
           City: <span className="fw-bold text-primary">{meteo.name}</span>
         </p>
