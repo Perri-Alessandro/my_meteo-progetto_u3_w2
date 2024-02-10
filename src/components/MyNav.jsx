@@ -15,6 +15,7 @@ const MyNav = (props) => {
   const [showOptions, setShowOptions] = useState(true);
 
   const handleCitySearch = () => {
+    props.handleNewSearch();
     if (!cityAndCountry.trim()) {
       alert("Please enter a city name.");
       return;
@@ -68,6 +69,7 @@ const MyNav = (props) => {
         props.handleSearch(weatherData);
         props.closeWelcome();
         props.handleCitySelection();
+
         // fetch(
         //   `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName},${countryCode}&appid=32c53ab5bcc217dac5852efd68dc0544&units=metric`
         // )

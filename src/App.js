@@ -16,6 +16,10 @@ function App() {
     setSelectedCity(cityData);
   };
 
+  const handleNewSearch = () => {
+    setShowCityMeteo(false);
+  };
+
   const handleCitySelection = () => {
     setShowCityMeteo(true);
   };
@@ -31,6 +35,7 @@ function App() {
           closeWelcome={closeWelcome}
           title="Giuliacxi"
           handleSearch={handleCitySearch}
+          handleNewSearch={handleNewSearch}
           handleCitySelection={handleCitySelection}
         />
       </header>
