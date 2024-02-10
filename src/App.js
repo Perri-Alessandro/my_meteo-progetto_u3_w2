@@ -9,11 +9,16 @@ import CityMeteo from "./components/CityMeteo";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showCityMeteo, setShowCityMeteo] = useState(false);
 
   const handleCitySearch = (cityData) => {
     setSelectedCity(cityData);
   };
-  const [showWelcome, setShowWelcome] = useState(true);
+
+  const handleCitySelection = () => {
+    setShowCityMeteo(true);
+  };
 
   const closeWelcome = () => {
     setShowWelcome(false);
@@ -26,12 +31,13 @@ function App() {
           closeWelcome={closeWelcome}
           title="Giuliacxi"
           handleSearch={handleCitySearch}
+          handleCitySelection={handleCitySelection}
         />
         {showWelcome && <Welcome />}
       </header>
       <main className="flex-grow-1">
         <Container>
-          {selectedCity && <CityMeteo city={selectedCity} />}
+          {showCityMeteo && <CityMeteo city={selectedCity} />}
         </Container>
       </main>
       <MyFooter

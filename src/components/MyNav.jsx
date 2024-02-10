@@ -41,7 +41,33 @@ const MyNav = (props) => {
         props.handleSearch(data);
         props.closeWelcome();
         setFoundCities(data);
+      })
+      .catch((err) => {
+        console.log("ERRORE NEL CONTATTARE IL SERVER", err);
+        alert("ERRORE NEL CONTATTARE IL SERVER");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
+  const handleCitySelection = (selectedCity) => {
+    setLoading(true);
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.name},${selectedCity.country}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error fetching weather data");
+        }
+      })
+      .then((weatherData) => {
+        console.log("DATI RICEVUTI PER LA CITTà SELEZIONATA:", weatherData);
+        props.handleSearch(weatherData);
+        props.closeWelcome();
+        props.handleCitySelection();
         // fetch(
         //   `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${cityName},${countryCode}&appid=32c53ab5bcc217dac5852efd68dc0544&units=metric`
         // )
@@ -66,33 +92,6 @@ const MyNav = (props) => {
         //   .finally(() => {
         //     setLoading(false);
         //   });
-      })
-      .catch((err) => {
-        console.log("ERRORE NEL CONTATTARE IL SERVER", err);
-        alert("ERRORE NEL CONTATTARE IL SERVER");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleCitySelection = (selectedCity) => {
-    setLoading(true);
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.name},${selectedCity.country}&APPID=54f053484e0d18baee784ea47f823bff&units=metric`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Error fetching weather data");
-        }
-      })
-      .then((weatherData) => {
-        // Esegui qui la logica per gestire i dati meteo della città selezionata
-        console.log("DATI RICEVUTI PER LA CITTà SELEZIONATA:", weatherData);
-        props.handleSearch(weatherData);
-        props.closeWelcome();
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);

@@ -27,11 +27,11 @@ const Welcome = () => {
 
           <p className="mb-0">
             Enter the country name, in the navigation bar input (from mobile by
-            clicking on the hamburger menu)
+            clicking on the hamburger menu).
           </p>
           <hr />
           <p>
-            weather data courtesy of openweathermap api, CET sunrise and sunset
+            Weather data courtesy of Openweathermap api, CET sunrise and sunset.
           </p>
           <div onClick={pageClick}>
             <p className=" text-danger fs-5">Click here to hide the alert</p>
