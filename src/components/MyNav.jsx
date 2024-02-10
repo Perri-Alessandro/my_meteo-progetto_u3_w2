@@ -179,9 +179,9 @@ const MyNav = (props) => {
               ))}
             </Row>
           )}
+          {loading && <Spinner className="ms-4 row" />}
         </Navbar.Collapse>
       </Container>
-      {loading && <Spinner className="ms-4 col" />}
     </Navbar>
   );
 };
