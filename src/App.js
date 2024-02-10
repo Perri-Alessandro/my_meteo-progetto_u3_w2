@@ -33,10 +33,10 @@ function App() {
           handleSearch={handleCitySearch}
           handleCitySelection={handleCitySelection}
         />
-        {showWelcome && <Welcome />}
       </header>
       <main className="flex-grow-1">
         <Container>
+          {showWelcome && <Welcome />}
           {showCityMeteo && <CityMeteo city={selectedCity} />}
         </Container>
       </main>

@@ -36,8 +36,8 @@
     transform: rotate(360deg);
   }
 }
-/* main {
-  background: url("https://cdnb.artstation.com/p/assets/images/images/044/118/371/large/perri-alessandro-torri100.jpg?1639134581");
+main {
+  background: url("/public/img/perri-alessandro-torri100.jpg");
   background-size: cover;
   background-position: center;
-} */
+}

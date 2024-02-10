@@ -28,9 +28,9 @@ const CityMeteo = ({ city }) => {
           Today <span className="fw-bold">{today}</span>
         </p>
       </Row>
-      <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center mx-1">
+      <Row className="mb-3 border border-primary rounded-5 justify-content-center align-items-center mx-1 bg-info">
         {/* <div className="background-overlay"></div> */}
-        <p className="fs-3 col-12 mt-2 fw-bold text-primary">
+        <p className="fs-2 col-12 mt-2 fw-bold text-primary">
           {meteo.name} ({meteo.sys && meteo.sys.country}){" "}
           <img
             className="bg-info rounded-5 ms-2"
@@ -43,32 +43,66 @@ const CityMeteo = ({ city }) => {
           />
         </p>
         <p className="col-12" style={{ fontSize: "92%" }}>
-          Latitude: {meteo.coord && meteo.coord.lat} - Longitude:{" "}
-          {meteo.coord && meteo.coord.lon}
+          Latitude:{" "}
+          <span className="fw-bold">{meteo.coord && meteo.coord.lat}</span> -
+          Longitude:{" "}
+          <span className="fw-bold">{meteo.coord && meteo.coord.lon}</span>
         </p>
-        <p className=" col-12  mb-5 fs-5 text-success">
+        <p className=" col-12  mb-5 fs-5 text-success fw-bold">
           {meteo.weather && meteo.weather.length > 0 && meteo.weather[0].main} -{" "}
           {meteo.weather &&
             meteo.weather.length > 0 &&
             meteo.weather[0].description}
         </p>
         <Col xs={6}>
-          <p>&deg;C: {meteo.main && meteo.main.temp}</p>
-          <p>&deg;C feels like: {meteo.main && meteo.main.feels_like}</p>
-          <p>&deg;C max: {meteo.main && meteo.main.temp_max}</p>
-          <p>&deg;C min: {meteo.main && meteo.main.temp_min}</p>
+          <p>
+            &deg;C:{" "}
+            <span className="fw-bold">{meteo.main && meteo.main.temp}</span>
+          </p>
+          <p>
+            &deg;C feels like:{" "}
+            <span className="fw-bold">
+              {meteo.main && meteo.main.feels_like}
+            </span>
+          </p>
+          <p>
+            &deg;C max:{" "}
+            <span className="fw-bold">{meteo.main && meteo.main.temp_max}</span>
+          </p>
+          <p>
+            &deg;C min:{" "}
+            <span className="fw-bold">{meteo.main && meteo.main.temp_min}</span>
+          </p>
         </Col>
         <Col xs={6}>
-          <p>Humidity: {meteo.main && meteo.main.humidity}</p>
-          <p>Pressure: {meteo.main && meteo.main.pressure}</p>
-          <p>Sunrise: {meteo.sys && formatTime(meteo.sys.sunrise)}</p>
-          <p>Sunset: {meteo.sys && formatTime(meteo.sys.sunset)}</p>
+          <p>
+            Humidity:{" "}
+            <span className="fw-bold">{meteo.main && meteo.main.humidity}</span>
+          </p>
+          <p>
+            Pressure:{" "}
+            <span className="fw-bold">{meteo.main && meteo.main.pressure}</span>
+          </p>
+          <p>
+            Sunrise:{" "}
+            <span className="fw-bold">
+              {meteo.sys && formatTime(meteo.sys.sunrise)}
+            </span>
+          </p>
+          <p>
+            Sunset:{" "}
+            <span className="fw-bold">
+              {meteo.sys && formatTime(meteo.sys.sunset)}
+            </span>
+          </p>
         </Col>
         <p className=" col-12">
           Wind Speed:{" "}
-          {meteo.wind?.speed
-            ? `${convertWindSpeed(meteo.wind.speed)} km/h`
-            : "N/A"}
+          <span className="fw-bold">
+            {meteo.wind?.speed
+              ? `${convertWindSpeed(meteo.wind.speed)} km/h`
+              : "N/A"}
+          </span>
         </p>
       </Row>
     </>
