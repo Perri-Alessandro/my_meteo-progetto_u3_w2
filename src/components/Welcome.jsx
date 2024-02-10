@@ -33,7 +33,7 @@ const Welcome = () => {
           <p>
             Weather data courtesy of Openweathermap API, CET sunrise and sunset.
             <br />
-            The free API from which I get the weather data only offers 1000
+            The free API, from which I get the weather data, only offers 1000
             requests per day.
           </p>
           <div onClick={pageClick}>
