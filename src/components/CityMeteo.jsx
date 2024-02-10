@@ -29,7 +29,7 @@ const CityMeteo = ({ city }) => {
         </p>
       </Row>
       <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center mx-1">
-        <div className="background-overlay"></div>
+        {/* <div className="background-overlay"></div> */}
         <p className="fs-3 col-12 mt-2 fw-bold text-primary">
           {meteo.name} ({meteo.sys && meteo.sys.country}){" "}
           <img
@@ -42,7 +42,7 @@ const CityMeteo = ({ city }) => {
             alt="wheater img"
           />
         </p>
-        <p className="fs-5 col-12">
+        <p className="col-12" style={{ fontSize: "92%" }}>
           Latitude: {meteo.coord && meteo.coord.lat} - Longitude:{" "}
           {meteo.coord && meteo.coord.lon}
         </p>

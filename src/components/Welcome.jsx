@@ -30,7 +30,9 @@ const Welcome = () => {
             clicking on the hamburger menu)
           </p>
           <hr />
-          <p>weather data courtesy of openweathermap api</p>
+          <p>
+            weather data courtesy of openweathermap api, CET sunrise and sunset
+          </p>
           <div onClick={pageClick}>
             <p className=" text-danger fs-5">Click here to hide the alert</p>
           </div>
