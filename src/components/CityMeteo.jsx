@@ -16,6 +16,9 @@ const CityMeteo = ({ city }) => {
     const date = new Date(timestamp * 1000); // Moltiplica per 1000 per convertire in millisecondi
     return date.toLocaleTimeString(); // Ottiene l'ora in formato locale
   };
+  const convertWindSpeed = (speedInMetersPerSecond) => {
+    return (speedInMetersPerSecond * 3.6).toFixed(2); // Conversion formula: m/s * 3.6 = km/h
+  };
 
   return (
     <>
@@ -27,11 +30,8 @@ const CityMeteo = ({ city }) => {
       </Row>
       <Row className="mb-3 border border-info rounded-5 justify-content-center align-items-center mx-1">
         <div className="background-overlay"></div>
-        <p className="fs-3 col-12 mt-2">
-          City:{" "}
-          <span className="fw-bold text-primary">
-            {meteo.name} ({meteo.sys && meteo.sys.country})
-          </span>{" "}
+        <p className="fs-3 col-12 mt-2 fw-bold text-primary">
+          {meteo.name} ({meteo.sys && meteo.sys.country}){" "}
           <img
             className="bg-info rounded-5 ms-2"
             src={
@@ -64,7 +64,12 @@ const CityMeteo = ({ city }) => {
           <p>Sunrise: {meteo.sys && formatTime(meteo.sys.sunrise)}</p>
           <p>Sunset: {meteo.sys && formatTime(meteo.sys.sunset)}</p>
         </Col>
-        <p className=" col-12">Wind Speed: {meteo.wind?.speed ?? "N/A"} m/s</p>
+        <p className=" col-12">
+          Wind Speed:{" "}
+          {meteo.wind?.speed
+            ? `${convertWindSpeed(meteo.wind.speed)} km/h`
+            : "N/A"}
+        </p>
       </Row>
     </>
   );
