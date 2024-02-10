@@ -24,13 +24,13 @@ const CityMeteo = ({ city }) => {
     <>
       <Row>
         {" "}
-        <p className="mt-3 fs-5 col-12">
+        <p className="mt-3 fs-5 col-12 text-secondary">
           Today <span className="fw-bold">{today}</span>
         </p>
       </Row>
       <Row className="mb-3 border border-primary rounded-5 justify-content-center align-items-center mx-1 bg-info">
         {/* <div className="background-overlay"></div> */}
-        <p className="fs-2 col-12 mt-2 fw-bold text-primary">
+        <p className="fs-1 col-12 mt-2 fw-bold text-primary">
           {meteo.name} ({meteo.sys && meteo.sys.country}){" "}
           <img
             className="bg-info rounded-5 ms-2"

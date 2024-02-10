@@ -26,8 +26,8 @@ const Welcome = () => {
           <hr />
 
           <p className="mb-0">
-            Enter the country name, in the navigation bar input (from mobile by
-            clicking on the hamburger menu).
+            Enter the country name, in the navigation bar input (by clicking on
+            the hamburger menu).
           </p>
           <hr />
           <p>

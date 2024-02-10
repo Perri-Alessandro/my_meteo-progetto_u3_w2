@@ -104,7 +104,7 @@ const MyNav = (props) => {
   };
 
   return (
-    <Navbar expand="lg" className="bg-black">
+    <Navbar expand="xxxl" className="bg-black">
       <Container fluid>
         <Navbar.Brand href="#" className="text-white">
           {" "}
