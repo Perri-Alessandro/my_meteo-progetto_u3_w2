@@ -146,7 +146,13 @@ const MyNav = (props) => {
             </NavDropdown>
           </Nav>
 
-          <Form className="d-flex">
+          <Form
+            className="d-flex"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCitySearch();
+            }}
+          >
             <Form.Control
               type="search"
               placeholder="Insert city to search"
